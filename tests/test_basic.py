@@ -5,7 +5,7 @@
 # 4. зробити маркери (лейбли)
 # 5. прописати їх в pytest.ini
 # 6. проранити через terminal pytest використовуючи оператори AND, OR, NOT
-
+import pytest
 import requests
 
 
@@ -35,7 +35,7 @@ def test_norris_get_categories_response_body_check():
 
 
 # Jokes Category
-def test_norris_get_category():
+def test_norris_get_by_category():
     categories = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
                   'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
 
@@ -51,3 +51,28 @@ def test_norris_get_random_success_code():
     resp = requests.get(
         url='https://api.chucknorris.io/jokes/random')
     assert resp.status_code == 200
+
+
+def test_norris_get_by_query_success_code():
+    test_query = 'Chuck'
+    resp = requests.get(
+        url=f'https://api.chucknorris.io/jokes/search?query={test_query}'
+    )
+    assert resp.status_code == 200
+    assert resp.json()['total'] != 0
+    assert resp.json()['result'] != []
+    assert resp.json()['result'][0]['created_at'] is not None
+    assert resp.json()['result'][0]['icon_url'] is not None
+    assert resp.json()['result'][0]['id'] is not None
+    assert resp.json()['result'][0]['updated_at'] is not None
+    assert resp.json()['result'][0]['url'] is not None
+    assert resp.json()['result'][0]['value'] is not None
+
+
+@pytest.mark.skip("BUG: Empty Category is present")
+def test_norris_get_by_query_category_field_check():
+    test_query = 'Chuck'
+    resp = requests.get(
+        url=f'https://api.chucknorris.io/jokes/search?query={test_query}'
+    )
+    assert resp.json()['result'][0]['categories'] != [], 'Category is be empty'
