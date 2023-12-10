@@ -1,14 +1,15 @@
 # Home Task:
 # 1. Покрити api chuck norris https://api.chucknorris.io/
-# 2. тести створити атомарі
-# 3. зробити фікстуру
-# 4. зробити маркери (лейбли)
-# 5. прописати їх в pytest.ini
-# 6. проранити через terminal pytest використовуючи оператори AND, OR, NOT
+# 2. Тести створити атомарі
+# 3. Зробити фікстуру
+# 4. Зробити маркери (лейбли)
+# 5. Прописати їх в pytest.ini
+# 6. Проранити через terminal pytest використовуючи оператори AND, OR, NOT
 
 # Questions:
 # 1. Should I check data type for response fields?
 # 2. Is it OK that for getting joke I get key categories NOT category, and data type is list
+# 3. I cannot get 400 error code 'https://api.chucknorris.io/jokes/random?category={}'
 
 import pytest
 import requests
@@ -50,6 +51,17 @@ def test_norris_get_by_category():
             url=f'https://api.chucknorris.io/jokes/random?category={category}')
 
         assert resp.status_code == 200
+
+
+def test_norris_get_by_empty_category():
+    resp = requests.get(
+        url='https://api.chucknorris.io/jokes/random?category='
+    )
+    result = resp.json()
+    assert resp.status_code == 404
+    assert resp.json()['error'] == 'Not Found'
+    assert resp.json()['message'] == 'No jokes for category "" found.'
+    assert resp.json()['timestamp'] != ''
 
 
 # Jokes Random
@@ -95,6 +107,3 @@ def test_norris_get_by_query_category_field_check():
     )
 
     assert resp.json()['result'][0]['categories'] != [], 'Category is be empty'
-
-
-
