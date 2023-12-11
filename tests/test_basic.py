@@ -15,7 +15,7 @@ import pytest
 import requests
 
 
-# Info request
+# DONE! Info request
 def test_post_info_request():
     resp = requests.post(
         url='https://postman-rest-api-learner.glitch.me//info',
@@ -24,7 +24,7 @@ def test_post_info_request():
     assert resp.json()['data']['name'] == 'Will'
 
 
-# Jokes Categories
+# DONE! Jokes Categories
 def test_norris_get_categories_success_code_check():
     resp = requests.get(
         url='https://api.chucknorris.io/jokes/categories'
@@ -36,12 +36,18 @@ def test_norris_get_categories_response_body_check():
     resp = requests.get(
         url='https://api.chucknorris.io/jokes/categories'
     )
-    assert len(resp.json()) == 16
     assert resp.json() == ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
                            'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
 
 
-# Jokes Category
+def test_norris_get_categories_response_body_len_check():
+    resp = requests.get(
+        url='https://api.chucknorris.io/jokes/categories'
+    )
+    assert len(resp.json()) == 16
+
+
+# DONE! Jokes Category
 def test_norris_get_by_category():
     categories = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
                   'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
@@ -59,6 +65,18 @@ def test_norris_get_by_empty_category():
     )
     result = resp.json()
     assert resp.status_code == 404
+    assert resp.json()['error'] == 'Not Found'
+    assert resp.json()['message'] == 'No jokes for category "" found.'
+    assert resp.json()['timestamp'] != ''
+
+
+@pytest.mark.skip(reason='404 is present where it should be 400')
+def test_norris_get_by_wrong_category():
+    resp = requests.get(
+        url='https://api.chucknorris.io/jokes/random?category=[]'
+    )
+    result = resp.json()
+    assert resp.status_code == 400
     assert resp.json()['error'] == 'Not Found'
     assert resp.json()['message'] == 'No jokes for category "" found.'
     assert resp.json()['timestamp'] != ''
