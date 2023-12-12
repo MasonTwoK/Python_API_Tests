@@ -63,7 +63,6 @@ def test_norris_get_by_empty_category():
     resp = requests.get(
         url='https://api.chucknorris.io/jokes/random?category='
     )
-    result = resp.json()
     assert resp.status_code == 404
     assert resp.json()['error'] == 'Not Found'
     assert resp.json()['message'] == 'No jokes for category "" found.'
