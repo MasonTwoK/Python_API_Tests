@@ -11,30 +11,17 @@
 # 2. Is it OK that for getting joke I get key categories NOT category, and data type is list
 # 3. I cannot get 400 error code 'https://api.chucknorris.io/jokes/random?category={}'
 # 4. Is it ok that I cannot understand 90% of what I read there https://docs.pytest.org/en/7.1.x/example/markers.html ?
+# 5. Why do we not use return in conftest.py line 21 ?
 
 import pytest
 import requests
 
 
-@pytest.fixture()
-def setup():
-    print('Pre-condition actions')
-
-
-@pytest.fixture()
-def teardown():
-    yield
-    print('Post-condition actions')
-
-
 # DONE! Info request
 @pytest.mark.info_request
-def test_post_info_request(setup, teardown):
-    resp = requests.post(
-        url='https://postman-rest-api-learner.glitch.me//info',
-        json={"name": "Will"})
-    assert resp.status_code == 200
-    assert resp.json()['data']['name'] == 'Will'
+def test_post_info_request(post_requests):
+    assert post_requests.status_code == 200
+    assert post_requests.json()['data']['name'] == 'Will'
 
 
 # DONE! Jokes Categories
