@@ -10,6 +10,7 @@
 # 1. Should I check data type for response fields?
 # 2. Is it OK that for getting joke I get key categories NOT category, and data type is list
 # 3. I cannot get 400 error code 'https://api.chucknorris.io/jokes/random?category={}'
+# 4. Is it ok that I cannot understand 90% of what I read there https://docs.pytest.org/en/7.1.x/example/markers.html ?
 
 import pytest
 import requests
@@ -27,6 +28,7 @@ def teardown():
 
 
 # DONE! Info request
+@pytest.mark.info_request
 def test_post_info_request(setup, teardown):
     resp = requests.post(
         url='https://postman-rest-api-learner.glitch.me//info',
