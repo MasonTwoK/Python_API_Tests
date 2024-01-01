@@ -1,7 +1,7 @@
 # Home Task:
 # + 1. Покрити api chuck norris https://api.chucknorris.io/
 # + 2. Тести створити атомарі
-# 3. Зробити фікстуру
+# + 3. Зробити фікстуру
 # 4. Зробити маркери (лейбли)
 # 5. Прописати їх в pytest.ini
 # 6. Проранити через terminal pytest використовуючи оператори AND, OR, NOT
@@ -15,8 +15,19 @@ import pytest
 import requests
 
 
+@pytest.fixture()
+def setup():
+    print('Pre-condition actions')
+
+
+@pytest.fixture()
+def teardown():
+    yield
+    print('Post-condition actions')
+
+
 # DONE! Info request
-def test_post_info_request():
+def test_post_info_request(setup, teardown):
     resp = requests.post(
         url='https://postman-rest-api-learner.glitch.me//info',
         json={"name": "Will"})
@@ -189,7 +200,7 @@ def test_norris_get_by_query_success_code():
     assert resp.status_code == 200
 
 
-def test_norris_get_by_query_success_responce_presence():
+def test_norris_get_by_query_success_response_presence():
     test_query = 'Chuck'
     resp = requests.get(
         url=f'https://api.chucknorris.io/jokes/search?query={test_query}'
