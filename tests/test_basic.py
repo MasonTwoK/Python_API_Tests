@@ -5,6 +5,7 @@
 # 4. Зробити маркери (лейбли)
 # 5. Прописати їх в pytest.ini
 # 6. Проранити через terminal pytest використовуючи оператори AND, OR, NOT
+# 7. Flask simple REST API
 
 # Questions:
 # 1. Should I check data type for response fields?
@@ -12,6 +13,8 @@
 # 3. I cannot get 400 error code 'https://api.chucknorris.io/jokes/random?category={}'
 # 4. Is it ok that I cannot understand 90% of what I read there https://docs.pytest.org/en/7.1.x/example/markers.html ?
 # 5. Why do we not use return in conftest.py line 21 ?
+# 6. Difference between iterator and generator
+# 7. Check what is yield
 
 import pytest
 import requests
@@ -25,25 +28,21 @@ def test_post_info_request(post_requests):
 
 
 # DONE! Jokes Categories
-def test_norris_get_categories_success_code_check():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/categories'
-    )
-    assert resp.status_code == 200
+@pytest.mark.norris_get_categories
+def test_norris_get_categories_success_code_check(norris_get_categories):
+    assert norris_get_categories.status_code == 200
 
 
-def test_norris_get_categories_response_body_check():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/categories'
-    )
-    assert resp.json() == ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
-                           'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
+@pytest.mark.norris_get_categories
+def test_norris_get_categories_response_body_check(norris_get_categories):
+    assert norris_get_categories.json() == ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food',
+                                            'history', 'money',
+                                            'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
 
 
-def test_norris_get_categories_amount_check():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/categories'
-    )
+@pytest.mark.norris_get_categories
+def test_norris_get_categories_amount_check(norris_get_categories):
+    resp = norris_get_categories
     assert len(resp.json()) == 16
 
 
