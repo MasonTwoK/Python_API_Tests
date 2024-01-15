@@ -53,66 +53,50 @@ def test_norris_get_by_category():
 
     for category in categories:
         resp = requests.get(
-            url=f'https://api.chucknorris.io/jokes/random?category={category}')
-
+            url=f'https://api.chucknorris.io/jokes/random?category={category}'
+        )
         assert resp.status_code == 200
 
 
-def test_norris_get_by_empty_category_code():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category='
-    )
-    assert resp.status_code == 404
+@pytest.mark.norris_get_by_empty_category
+def test_norris_get_by_empty_category_code(norris_get_by_empty_category):
+    assert norris_get_by_empty_category.status_code == 404
 
 
-def test_norris_get_by_empty_category_error_type():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category='
-    )
-    assert resp.json()['error'] == 'Not Found'
+@pytest.mark.norris_get_by_empty_category
+def test_norris_get_by_empty_category_error_type(norris_get_by_empty_category):
+    assert norris_get_by_empty_category.json()['error'] == 'Not Found'
 
 
-def test_norris_get_by_empty_category_message():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category='
-    )
-    assert resp.json()['message'] == 'No jokes for category "" found.'
+@pytest.mark.norris_get_by_empty_category
+def test_norris_get_by_empty_category_message(norris_get_by_empty_category):
+    assert norris_get_by_empty_category.json()['message'] == 'No jokes for category "" found.'
 
 
-def test_norris_get_by_empty_category_timestamp():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category='
-    )
-    assert resp.json()['timestamp'] != ''
+@pytest.mark.norris_get_by_empty_category
+def test_norris_get_by_empty_category_timestamp(norris_get_by_empty_category):
+    assert norris_get_by_empty_category.json()['timestamp'] != ''
 
 
 @pytest.mark.skip(reason='404 is present where it should be 400')
-def test_norris_get_by_wrong_category_code():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category=[]'
-    )
-    assert resp.status_code == 400
+@pytest.mark.norris_get_by_wrong_category
+def test_norris_get_by_wrong_category_code(norris_get_by_wrong_category):
+    assert norris_get_by_wrong_category.status_code == 400
 
 
-def test_norris_get_by_wrong_category_error_type():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category=[]'
-    )
-    assert resp.json()['error'] == 'Not Found'
+@pytest.mark.norris_get_by_wrong_category
+def test_norris_get_by_wrong_category_error_type(norris_get_by_wrong_category):
+    assert norris_get_by_wrong_category.json()['error'] == 'Not Found'
 
 
-def test_norris_get_by_wrong_category_message():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category=[]'
-    )
-    assert resp.json()['message'] == 'No jokes for category "[]" found.'
+@pytest.mark.norris_get_by_wrong_category
+def test_norris_get_by_wrong_category_message(norris_get_by_wrong_category):
+    assert norris_get_by_wrong_category.json()['message'] == 'No jokes for category "[]" found.'
 
 
-def test_norris_get_by_wrong_category_timestamp():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random?category=[]'
-    )
-    assert resp.json()['timestamp'] != ''
+@pytest.mark.norris_get_by_wrong_category
+def test_norris_get_by_wrong_category_timestamp(norris_get_by_wrong_category):
+    assert norris_get_by_wrong_category.json()['timestamp'] != ''
 
 
 # Jokes Random
