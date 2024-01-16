@@ -100,70 +100,62 @@ def test_norris_get_by_wrong_category_timestamp(norris_get_by_wrong_category):
 
 
 # Jokes Random
-def test_norris_get_random_success_code():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-
-    assert resp.status_code == 200, 'Returned status code is not 200'
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_code(norris_get_random):
+    assert norris_get_random.status_code == 200, 'Returned status code is not 200'
 
 
 @pytest.mark.skip(reason='BUG #1: Empty Category could be present')
-def test_norris_get_random_success_category_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['categories'] != [], 'Category is not set'
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_category_presence(norris_get_random):
+    assert norris_get_random.json()['categories'] != [], 'Category is not set'
 
 
 @pytest.mark.skip(reason='BUG #1: Empty Category could be present')
-def test_norris_get_random_success_categories_amount_for_joke():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_categories_amount_for_joke(norris_get_random):
+    resp = norris_get_random
     assert len(resp.json()['categories']) == 1, 'Length of categories is not equal 1'
 
 
-def test_norris_get_random_response_body_amount():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
+@pytest.mark.norris_get_random
+def test_norris_get_random_response_body_amount(norris_get_random):
+    resp = norris_get_random
     assert len(resp.json()) == 7, 'Length of response body size is not 7'
 
 
-def test_norris_get_random_success_creation_date_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['created_at'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_creation_date_presence(norris_get_random):
+    assert norris_get_random.json()['created_at'] is not None
 
 
-def test_norris_get_random_success_icon_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['icon_url'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_icon_presence(norris_get_random):
+    assert norris_get_random.json()['icon_url'] is not None
 
 
-def test_norris_get_random_success_id_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['id'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_id_presence(norris_get_random):
+    assert norris_get_random.json()['id'] is not None
 
 
-def test_norris_get_random_success_update_field_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['updated_at'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_update_field_presence(norris_get_random):
+    assert norris_get_random.json()['updated_at'] is not None
 
 
-def test_norris_get_random_success_url_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['url'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_url_presence(norris_get_random):
+    assert norris_get_random.json()['url'] is not None
 
 
-def test_norris_get_random_success_value_presence():
-    resp = requests.get(
-        url='https://api.chucknorris.io/jokes/random')
-    assert resp.json()['value'] is not None
+@pytest.mark.norris_get_random
+def test_norris_get_random_success_value_presence(norris_get_random):
+    assert norris_get_random.json()['value'] is not None
 
 
 # Jokes by Query
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_code():
     test_query = 'Chuck'
     resp = requests.get(
@@ -172,6 +164,7 @@ def test_norris_get_by_query_success_code():
     assert resp.status_code == 200
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_response_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -180,6 +173,7 @@ def test_norris_get_by_query_success_response_presence():
     assert resp.json() is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_total_amount_jokes():
     test_query = 'Chuck'
     resp = requests.get(
@@ -188,6 +182,7 @@ def test_norris_get_by_query_success_total_amount_jokes():
     assert resp.json()['total'] != 0
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_result_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -196,6 +191,7 @@ def test_norris_get_by_query_success_result_presence():
     assert resp.json()['result'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_creation_date_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -204,6 +200,7 @@ def test_norris_get_by_query_success_creation_date_presence():
     assert resp.json()['result'][0]['created_at'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_icon_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -212,6 +209,7 @@ def test_norris_get_by_query_success_icon_presence():
     assert resp.json()['result'][0]['icon_url'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_id_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -220,6 +218,7 @@ def test_norris_get_by_query_success_id_presence():
     assert resp.json()['result'][0]['id'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_update_date_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -228,6 +227,7 @@ def test_norris_get_by_query_success_update_date_presence():
     assert resp.json()['result'][0]['updated_at'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_url_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -236,6 +236,7 @@ def test_norris_get_by_query_success_url_presence():
     assert resp.json()['result'][0]['url'] is not None
 
 
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_success_value_presence():
     test_query = 'Chuck'
     resp = requests.get(
@@ -245,6 +246,7 @@ def test_norris_get_by_query_success_value_presence():
 
 
 @pytest.mark.skip("BUG #1: Empty Category is present")
+@pytest.mark.norris_get_by_query
 def test_norris_get_by_query_category_field_check():
     test_query = 'Chuck'
     resp = requests.get(

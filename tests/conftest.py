@@ -32,3 +32,11 @@ def norris_get_by_wrong_category():
         url='https://api.chucknorris.io/jokes/random?category=[]'
     )
     yield resp
+
+
+@pytest.fixture
+def norris_get_random():
+    resp = requests.get(
+        url='https://api.chucknorris.io/jokes/random'
+    )
+    yield resp
