@@ -2,7 +2,7 @@
 # + 1. Покрити api chuck norris https://api.chucknorris.io/
 # + 2. Тести створити атомарі
 # + 3. Зробити фікстуру
-# 4. Зробити маркери (лейбли)
+# + 4. Зробити маркери (лейбли)
 # 5. Прописати їх в pytest.ini
 # 6. Проранити через terminal pytest використовуючи оператори AND, OR, NOT
 # 7. Flask simple REST API
@@ -20,14 +20,12 @@ import pytest
 import requests
 
 
-# DONE! Info request
 @pytest.mark.info_request
 def test_post_info_request(post_requests):
     assert post_requests.status_code == 200
     assert post_requests.json()['data']['name'] == 'Will'
 
 
-# DONE! Jokes Categories
 @pytest.mark.norris_get_categories
 def test_norris_get_categories_success_code_check(norris_get_categories):
     assert norris_get_categories.status_code == 200
@@ -46,7 +44,7 @@ def test_norris_get_categories_amount_check(norris_get_categories):
     assert len(resp.json()) == 16
 
 
-# DONE! Jokes Category
+@pytest.mark.norris_get_by_category
 def test_norris_get_by_category():
     categories = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
                   'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
@@ -99,7 +97,6 @@ def test_norris_get_by_wrong_category_timestamp(norris_get_by_wrong_category):
     assert norris_get_by_wrong_category.json()['timestamp'] != ''
 
 
-# Jokes Random
 @pytest.mark.norris_get_random
 def test_norris_get_random_success_code(norris_get_random):
     assert norris_get_random.status_code == 200, 'Returned status code is not 200'
