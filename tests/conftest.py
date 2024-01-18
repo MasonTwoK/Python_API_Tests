@@ -40,3 +40,11 @@ def norris_get_random():
         url='https://api.chucknorris.io/jokes/random'
     )
     yield resp
+
+
+@pytest.fixture
+def norris_get_by_query():
+    resp = requests.get(
+        url='https://api.chucknorris.io/jokes/search?query=Chuck'
+    )
+    yield resp
