@@ -45,15 +45,83 @@ def test_norris_get_categories_amount_check(norris_get_categories):
 
 
 @pytest.mark.norris_get_by_category
-def test_norris_get_by_category():
-    categories = ['animal', 'career', 'celebrity', 'dev', 'explicit', 'fashion', 'food', 'history', 'money',
-                  'movie', 'music', 'political', 'religion', 'science', 'sport', 'travel']
+def test_norris_get_by_category_animal(norris_get_by_category_animal):
+    assert norris_get_by_category_animal.status_code == 200
 
-    for category in categories:
-        resp = requests.get(
-            url=f'https://api.chucknorris.io/jokes/random?category={category}'
-        )
-        assert resp.status_code == 200
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_career(norris_get_by_category_career):
+    assert norris_get_by_category_career.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_celebrity(norris_get_by_category_celebrity):
+    assert norris_get_by_category_celebrity.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_dev(norris_get_by_category_dev):
+    assert norris_get_by_category_dev.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_explicit(norris_get_by_category_explicit):
+    assert norris_get_by_category_explicit.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_fashion(norris_get_by_category_fashion):
+    assert norris_get_by_category_fashion.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_food(norris_get_by_category_food):
+    assert norris_get_by_category_food.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_history(norris_get_by_category_history):
+    assert norris_get_by_category_history.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_money(norris_get_by_category_money):
+    assert norris_get_by_category_money.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_movie(norris_get_by_category_movie):
+    assert norris_get_by_category_movie.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_music(norris_get_by_category_music):
+    assert norris_get_by_category_music.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_political(norris_get_by_category_political):
+    assert norris_get_by_category_political.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_religion(norris_get_by_category_religion):
+    assert norris_get_by_category_religion.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_science(norris_get_by_category_science):
+    assert norris_get_by_category_science.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_sport(norris_get_by_category_sport):
+    assert norris_get_by_category_sport.status_code == 200
+
+
+@pytest.mark.norris_get_by_category
+def test_norris_get_by_category_travel(norris_get_by_category_travel):
+    assert norris_get_by_category_travel.status_code == 200
 
 
 @pytest.mark.norris_get_by_empty_category
