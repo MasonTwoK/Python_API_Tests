@@ -176,3 +176,32 @@ def norris_get_by_category_travel():
         url='https://api.chucknorris.io/jokes/random?category=travel'
     )
     yield resp
+
+
+@pytest.fixture
+def petstore_post_store_order():
+    resp = requests.post(
+        url='https://petstore.swagger.io/v2/store/order',
+        json={"id": 100,
+              "petId": 10,
+              "quantity": 100,
+              "shipDate": "2024-01-21T16:50:37.270Z",
+              "status": "placed",
+              "complete": True})
+    yield resp
+
+
+@pytest.fixture
+def petstore_get_store_order():
+    resp = requests.get(
+        url='https://petstore.swagger.io/v2/store/order/100'
+    )
+    yield resp
+
+
+@pytest.fixture
+def petstore_delete_store_order():
+    resp = requests.delete(
+        url='https://petstore.swagger.io/v2/store/order/100'
+    )
+    yield resp
