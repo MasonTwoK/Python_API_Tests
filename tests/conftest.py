@@ -1,5 +1,6 @@
 import pytest
 import requests
+import content
 
 
 @pytest.fixture
@@ -182,12 +183,7 @@ def norris_get_by_category_travel():
 def petstore_post_store_order():
     resp = requests.post(
         url='https://petstore.swagger.io/v2/store/order',
-        json={"id": 100,
-              "petId": 10,
-              "quantity": 100,
-              "shipDate": "2024-01-21T16:50:37.270Z",
-              "status": "placed",
-              "complete": True})
+        json=content.preset_store_order_1)
     yield resp
 
 
