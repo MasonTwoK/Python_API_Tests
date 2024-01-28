@@ -17,13 +17,6 @@
 # 7. Check what is yield
 
 import pytest
-import requests
-
-
-@pytest.mark.info_request
-def test_post_info_request(post_requests):
-    assert post_requests.status_code == 200
-    assert post_requests.json()['data']['name'] == 'Will'
 
 
 @pytest.mark.norris_get_categories
