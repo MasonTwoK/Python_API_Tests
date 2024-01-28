@@ -188,6 +188,13 @@ def petstore_post_store_order():
 
 
 @pytest.fixture
+def petstore_post_store_order_without_body():
+    resp = requests.post(
+        url='https://petstore.swagger.io/v2/store/order')
+    yield resp
+
+
+@pytest.fixture
 def petstore_get_store_order():
     resp = requests.get(
         url='https://petstore.swagger.io/v2/store/order/100'
