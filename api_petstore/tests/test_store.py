@@ -15,7 +15,7 @@ class TestStorePost:
 
     @staticmethod
     @pytest.mark.skip(reason='BUG #2 Response generates with random date')
-    @pytest.mark.negative_senario
+    @pytest.mark.negative_scenario
     def test_post_store_order_with_empty_body(petstore_post_store_order_with_empty_body):
         assert petstore_post_store_order_with_empty_body.status_code == 400
 
