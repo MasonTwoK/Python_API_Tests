@@ -20,12 +20,14 @@ class TestStorePost:
         assert petstore_post_store_order_with_empty_body.status_code == 400
 
 
+@pytest.mark.petstore_store
 class TestStoreGet:
     @staticmethod
     def test_get_store_order_success(petstore_get_store_order):
         assert petstore_get_store_order.status_code == 200
 
 
+@pytest.mark.petstore_store
 class TestStoreDelete:
 
     @staticmethod
