@@ -33,3 +33,11 @@ class TestStoreDelete:
     @staticmethod
     def test_delete_store_order_success(petstore_delete_store_order):
         assert petstore_delete_store_order.status_code == 200
+
+
+@pytest.mark.petstore_store
+class TestStoreGetInventory:
+
+    @staticmethod
+    def test_get_store_inventory_success(petstore_get_store_inventory):
+        assert petstore_get_store_inventory.status_code == 200
