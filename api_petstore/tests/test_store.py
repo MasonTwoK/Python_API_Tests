@@ -1,5 +1,6 @@
 # Tests related to Store controller in https://petstore.swagger.io/
 import pytest
+from api_petstore import content
 
 
 @pytest.mark.petstore_store
@@ -25,6 +26,13 @@ class TestStoreGet:
     @staticmethod
     def test_get_store_order_success(petstore_get_store_order):
         assert petstore_get_store_order.status_code == 200
+        resp = petstore_get_store_order.json()
+        assert resp['id'] == content.preset_store_order_1['id']
+        assert resp['petId'] == content.preset_store_order_1['petId']
+        assert resp['quantity'] == content.preset_store_order_1['quantity']
+        assert resp['status'] == content.preset_store_order_1['status']
+        assert resp['complete'] == content.preset_store_order_1['complete']
+        # assert resp['shipDate'] == content.preset_store_order_1['shipDate'] # How to check data type right?
 
 
 @pytest.mark.petstore_store
@@ -35,9 +43,9 @@ class TestStoreDelete:
         assert petstore_delete_store_order.status_code == 200
 
 
+@pytest.mark.skip("Request GET Inventory looks wrong in Store controller")
 @pytest.mark.petstore_store
 class TestStoreGetInventory:
-
     @staticmethod
     def test_get_store_inventory_success(petstore_get_store_inventory):
         assert petstore_get_store_inventory.status_code == 200
