@@ -26,13 +26,13 @@ class TestStoreGet:
     @staticmethod
     def test_get_store_order_success(petstore_get_store_order):
         assert petstore_get_store_order.status_code == 200
-        resp = petstore_get_store_order.json()
-        assert resp['id'] == content.preset_store_order_1['id']
-        assert resp['petId'] == content.preset_store_order_1['petId']
-        assert resp['quantity'] == content.preset_store_order_1['quantity']
-        assert resp['status'] == content.preset_store_order_1['status']
-        assert resp['complete'] == content.preset_store_order_1['complete']
-        # assert resp['shipDate'] == content.preset_store_order_1['shipDate'] # How to check data type right?
+        response = petstore_get_store_order.json()
+        assert response['id'] == content.preset_store_order_1['id']
+        assert response['petId'] == content.preset_store_order_1['petId']
+        assert response['quantity'] == content.preset_store_order_1['quantity']
+        assert response['status'] == content.preset_store_order_1['status']
+        assert response['complete'] == content.preset_store_order_1['complete']
+        # assert response['shipDate'] == content.preset_store_order_1['shipDate'] # How to check data type right?
 
 
 @pytest.mark.petstore_store
