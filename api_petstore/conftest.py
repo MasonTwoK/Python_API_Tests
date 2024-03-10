@@ -1,6 +1,6 @@
 import pytest
 import requests
-from api_petstore import content
+import content
 
 
 @pytest.fixture
