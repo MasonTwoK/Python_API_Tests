@@ -13,8 +13,7 @@ def store_post_order():
 
 @pytest.fixture
 def store_post_order_without_body():
-    resp = requests.post(
-        url='https://petstore.swagger.io/v2/store/order')
+    resp = requests.post(url='https://petstore.swagger.io/v2/store/order')
     yield resp
 
 
@@ -36,9 +35,7 @@ def store_get_order():
 
 @pytest.fixture
 def store_delete_order():
-    resp = requests.delete(
-        url='https://petstore.swagger.io/v2/store/order/100'
-    )
+    resp = requests.delete(url='https://petstore.swagger.io/v2/store/order/100')
     yield resp
 
 
@@ -50,5 +47,7 @@ def store_get_inventory():
 
 @pytest.fixture
 def user_post_success():
-    resp = requests.post(url='https://petstore.swagger.io/v2/user', json=content.preset_user)
+    resp = requests.post(
+        url='https://petstore.swagger.io/v2/user',
+        json=content.preset_user)
     yield resp
