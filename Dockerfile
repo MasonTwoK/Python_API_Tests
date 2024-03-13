@@ -1,9 +1,8 @@
-FROM python:latest
-
-RUN pip install pytest
-RUN pip install requests
+FROM python
 
 WORKDIR /app
 COPY . /app
+
+RUN pip install -r requirements.txt
 
 CMD ["pytest", "-v"]
