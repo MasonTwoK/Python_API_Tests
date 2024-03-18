@@ -20,13 +20,14 @@ class TestStoreSuccess:
         # assert response['shipDate'] == #
 
         assert store_get_order.status_code == 200
+        response = store_get_order.json()
 
         assert store_delete_order.status_code == 200
 
 
 @pytest.mark.petstore_store
 @pytest.mark.scenario_negative
-class TestStorePost:
+class TestStorePostErrorHandling:
     @staticmethod
     @pytest.mark.skip(reason='BUG #1 Unexpected error code appear while sending request with out json body')
     def test_post_store_order_without_body(store_post_order_without_body):
@@ -38,24 +39,26 @@ class TestStorePost:
         assert store_post_order_with_empty_body.status_code == 400
 
 
+@pytest.mark.skip(reason='TBD')
 @pytest.mark.petstore_store
 @pytest.mark.scenario_negative
-class TestStoreGet:
+class TestStoreGetErrorHandling:
 
     @staticmethod
     def test_get_invalid_data(store_get_order):
         pass
 
 
+@pytest.mark.skip(reason='TBD')
 @pytest.mark.petstore_store
 @pytest.mark.scenario_negative
-class TestStoreDelete:
+class TestStoreDeleteErrorHandling:
     @staticmethod
     def test_delete_invalid_id():
         pass
 
 
-@pytest.mark.skip("Request GET Inventory looks wrong in Store controller")
+@pytest.mark.skip(reason='Request GET Inventory looks wrong in Store controller')
 @pytest.mark.petstore_store
 class TestStoreGetInventory:
     @staticmethod
