@@ -35,7 +35,7 @@ def store_get_order():
 
 @pytest.fixture
 def store_delete_order():
-    resp = requests.delete(url='https://petstore.swagger.io/v2/store/order/100')
+    resp = requests.delete(url=f'https://petstore.swagger.io/v2/store/order/{content.preset_store_order_1["id"]}')
     yield resp
 
 
