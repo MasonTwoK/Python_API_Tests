@@ -12,17 +12,33 @@ class TestStoreSuccess:
         response = store_post_order.json()
         assert len(response) == 6
 
-        assert response['id'] == 100
+        assert response['id'] == 101
         assert response['petId'] == 10
         assert response['quantity'] == 100
         assert response['status'] == "placed"
         assert response['complete'] is True
-        # assert response['shipDate'] == #
+        # assert response['shipDate'] ==  # Need to be discuss
 
         assert store_get_order.status_code == 200
-        response = store_get_order.json()
 
+        response = store_get_order.json()
+        assert len(response) == 6
+
+        assert response['id'] == 101
+        assert response['petId'] == 10
+        assert response['quantity'] == 100
+        assert response['status'] == "placed"
+        assert response['complete'] is True
+        # assert response['shipDate'] ==  # Need to be discuss
+
+        # BUG: Successful code is not described in documentation
         assert store_delete_order.status_code == 200
+
+        response = store_delete_order.json()
+        assert response['type'] == "unknown"  # BUG: Type is not described
+        assert response['message'] == "100"  # BUG: field should be named id ...
+
+        print()
 
 
 @pytest.mark.petstore_store
