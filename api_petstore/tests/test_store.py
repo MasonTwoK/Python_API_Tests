@@ -12,7 +12,7 @@ class TestStoreSuccess:
         response = store_post_order.json()
         assert len(response) == 6
 
-        assert response['id'] == 101
+        assert response['id'] == 100
         assert response['petId'] == 10
         assert response['quantity'] == 100
         assert response['status'] == "placed"
@@ -24,7 +24,7 @@ class TestStoreSuccess:
         response = store_get_order.json()
         assert len(response) == 6
 
-        assert response['id'] == 101
+        assert response['id'] == 100
         assert response['petId'] == 10
         assert response['quantity'] == 100
         assert response['status'] == "placed"
@@ -56,6 +56,11 @@ class TestStorePostErrorHandling:
     @pytest.mark.skip(reason='BUG #3 Random id assigned')
     def test_post_store_order_with_none_id(store_post_order_with_none_id):
         assert store_post_order_with_none_id.status_code == 400
+
+    @staticmethod
+    @pytest.mark.skip(reason='BUG #4 Server returns Error Code 500')
+    def test_post_store_order_with_text_in_id(store_post_order_with_text_id):
+        assert store_post_order_with_text_id.status_code == 400
 
 
 @pytest.mark.skip(reason='TBD')
