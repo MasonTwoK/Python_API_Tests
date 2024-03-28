@@ -26,6 +26,14 @@ def store_post_order_with_empty_body():
 
 
 @pytest.fixture
+def store_post_order_with_none_id():
+    resp = requests.post(
+        url='https://petstore.swagger.io/v2/store/order',
+        json=content.preset_store_order_2)
+    yield resp
+
+
+@pytest.fixture
 def store_get_order():
     resp = requests.get(
         url=f'https://petstore.swagger.io/v2/store/order/{content.preset_store_order_1["id"]}'

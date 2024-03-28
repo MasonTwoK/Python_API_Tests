@@ -38,8 +38,6 @@ class TestStoreSuccess:
         assert response['type'] == "unknown"  # BUG: Type is not described
         assert response['message'] == "100"  # BUG: field should be named id ...
 
-        print()
-
 
 @pytest.mark.petstore_store
 @pytest.mark.scenario_negative
@@ -53,6 +51,11 @@ class TestStorePostErrorHandling:
     @pytest.mark.skip(reason='BUG #2 Response generates with random date')
     def test_post_store_order_with_empty_body(store_post_order_with_empty_body):
         assert store_post_order_with_empty_body.status_code == 400
+
+    @staticmethod
+    @pytest.mark.skip(reason='BUG #3 Random id assigned')
+    def test_post_store_order_with_none_id(store_post_order_with_none_id):
+        assert store_post_order_with_none_id.status_code == 400
 
 
 @pytest.mark.skip(reason='TBD')
